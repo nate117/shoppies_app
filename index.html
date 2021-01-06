@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <title>Shoppies Awards</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="A movie nominations page">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        <style>
+            /* set body and heading styles */
+            body{margin: 0; padding: 0; background-color:cadetblue; font-family: sans-serif;}
+            h1, h2{margin-top: 5px; margin-bottom: 0;}
+            #appcontainer{
+                padding: 20px;
+            }
+            /* flex container class to be used to create flex containers, 
+            used in resultarea and nomination area */
+            .flexcontainer{
+                display: flex;
+                
+                
+            }
+            /* class used in application title banner area, aligns columns center */
+            .flexcontainer_centeritem{
+                display: flex;
+                align-items: center
+                
+            }
+            /* Set the title order to 2, will change to 1 on smaller screen */
+            #title{
+                order: 2;
+            }
+            /* Set the logo image column order to 1, will change to 2 on smaller screen */
+            #applogo{
+                order: 1;
+            }
+            
+            /* white button style */
+            .whitebutton {
+                border: 4px solid;
+                padding: 10px;
+                font-size: 1.2em;
+                border-color: black;
+                border-radius: 10px;
+                background-color: white;
+                color: black;
+                }
+            /* white button hover style */
+            .whitebutton:hover {
+                background-color: black;
+                border-color: white;
+                color: white;
+                }
+            
+            /* Create two equal columns that sits next to each other */
+            .column {
+                flex: 50%;
+                max-width: 50%;
+                padding: 0 4px;
+            }
+            
+            /*make the columns stack on small screen rearange title and logo*/
+            @media only screen and (max-width: 600px) {
+                .flexcontainer {
+                    flex-direction: column;
+                }
+                .flexcontainer_centeritem{
+                    flex-direction: column;
+                }
+                #title{
+                    order: 1;
+                }
+                #applogo{
+                    order: 2;
+                }
+                .column{
+                    flex: 100%;
+                    max-width: 100%;
+                }
+               
+            }
+           
+            /* gives the image responsive sizing, but limits the height to keep from sizing too large */
+            .responsive {
+                max-width: 100%;
+                max-height: 200px;
+                height: auto;
+            }
+            /* centers the text in the heading area */
+            #heading{
+                text-align: center;
+            }
+            /* search area style */
+             #searcharea{
+                 padding: 30px;
+                 background-color: black;
+                 color: white;
+                 border-radius: 25px;
+                 margin-top: 10px;
+                 /* adjusted to 20 pixels to account for negative margin in wrapper */
+                 margin-bottom: 20px;
+                
+            }
+            /* search box style */
+            #searcharea > input{
+                width: 100%;
+                max-width: 700px;
+                font-size: 1.3em;  
+            }
+            #searcharea > label{
+                
+                font-size: 1.3em;  
+            }
+            /* results area style */
+            #resultsarea{
+                padding: 30px;
+                background-color: black;
+                color: white;
+                border-radius: 25px;
+                margin: 10px;
+            }
+            /*used for the result list to flex the items*/
+            .results{
+                display: flex;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin-top: 5px;
+                border-bottom: 2px solid white;
+                
+            }
+            /* list style, removed padding, margin, bullets on result list output by javascript */
+            .results ul{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            /* result button style, keeps the nomination button to the far right */
+            .results button{
+                
+                margin-left: auto;
+            }
+            /* ID used for nomination area selected movie titles */
+            #nominationsarea{
+                padding: 30px;
+                background-color: black;
+                color: white;
+                border-radius: 25px;
+                margin: 10px;
+            }
+            /* ID used to style fixed banner notification, banner displayed when nominations reach 5 */
+            #banner{
+                display: none;
+                position: fixed;
+                top: 0;
+                background-color: black;
+                color: white;
+                width: 100%;
+                text-align: center;
+            }
+        </style>
+        <!--Banner notification to notify user that 5 nomination were selected-->
+        <div id="banner">
+            <p>You have nominated 5 movies!</p>
+            <i class="fa fa-check"></i>
+        </div>
+        <!--container for the entire app-->
+        <div id="appcontainer">
+            <!--flex container containing website logo and title-->
+            <div class="flexcontainer_centeritem"  id="heading">
+                <div id="title" >
+                <h1>The Shoppies</h1>
+                <p>Movie Awards for Entrepreneurs</p>
+                </div>
+                <div id="applogo" >
+                <img class="responsive" src="Artboard2.png" alt="website_graphic">
+                </div>
+            </div>
+            <!--Area containg search bar for searching movie titles-->
+            <div id="searcharea">
+                <label>Movie Title:</label>
+                <input id="searchbar"  type="text" name="search" placeholder="Search">
+            </div>
+            <!--Area cotaing 2 clumns for search result list and nomination list-->
+            <div class="wrapper" style="margin: -10px;">
+                <div class="flexcontainer">
+                    <div class="column" id="resultsarea">
+                        <h2>Results</h2>
+                        <div id="resultlist">
+                        </div>
+                    </div>
+                     <div class="column" id="nominationsarea">
+                        <h2>Nominations</h2>
+
+                                <div id="list">
+                                </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="omdbscript.js"></script>
+    </body>
+</html>
+
